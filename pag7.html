@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memorial Descritivo e de Cálculo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Simulação de Folha A4 */
+        .a4-page {
+            background-color: white;
+            width: 210mm;
+            min-height: 297mm;
+            padding: 25mm 25mm 30mm 25mm;
+            box-sizing: border-box;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .page-footer {
+            position: absolute;
+            bottom: 15mm;
+            right: 25mm;
+            font-size: 12px;
+            color: #555;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 16px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: normal;
+        }
+
+        h2 {
+            font-size: 18px;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-top: 10px;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        .content {
+            font-size: 14px;
+            line-height: 1.5;
+            text-align: justify;
+        }
+
+        /* Títulos */
+        .section-title-normal { font-weight: bold; margin-top: 25px; margin-bottom: 10px; display: block; }
+        .sub-section-title { font-weight: bold; margin-top: 20px; margin-bottom: 10px; display: block; }
+        .sub-sub-section-title { font-weight: bold; margin-top: 15px; margin-bottom: 5px; display: block; margin-left: 20px; }
+
+        /* Fórmulas Matemáticas */
+        .math-block {
+            font-family: 'Times New Roman', serif;
+            font-size: 15px;
+            margin: 15px 0;
+            padding-left: 10px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .fraction {
+            display: inline-block;
+            vertical-align: middle;
+            text-align: center;
+            margin: 0 5px;
+        }
+        
+        .fraction > span { display: block; padding: 0 3px; }
+        .fraction span.numerator { border-bottom: 1px solid black; }
+        .fraction span.denominator { padding-top: 2px; }
+        .math-symbol { margin: 0 5px; }
+        
+        /* Variáveis matemáticas em lista */
+        .math-list p {
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+            margin: 5px 0;
+        }
+
+        /* Listas e Tabelas */
+        ol.main-list { padding-left: 0; list-style-type: none; font-weight: bold; }
+        ol.main-list > li { margin-top: 20px; }
+        ol.main-list > li > p, ol.main-list > li > ul, ol.main-list > li > div { font-weight: normal; margin-top: 10px; }
+        ul { list-style-type: disc; padding-left: 20px; margin-top: 5px; }
+        li { margin-bottom: 5px; }
+        
+    table1 {
+        border-collapse: collapse;
+        font-family: Arial, sans-serif;
+        width: 100%;
+        max-width: 800px;
+        text-align: center;
+        border: 2px solid black;
+    }
+    td, th {
+        border: 1px solid black;
+        padding: 8px;
+    }
+    /* Título principal */
+    .titulo-top {
+        font-weight: bold;
+        font-style: italic;
+        font-size: 1.1em;
+        background-color: #f2f2f2; /* Leve destaque opcional */
+    }
+    /* Estilo da primeira coluna mesclada e cabeçalhos */
+    .destaque {
+        font-weight: bold;
+        font-style: italic;
+    }
+    .coluna-lateral {
+        width: 20%;
+        vertical-align: middle;
+        background-color: #fff;
+    }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; margin-bottom: 20px; font-size: 13px; }
+        table, th, td { border: 1px solid black; }
+        td, th { padding: 5px; vertical-align: middle; text-align: center; }
+        td.text-left { text-align: left; }
+        th { background-color: #fff; font-weight: bold; }
+        .italic-header { font-style: italic; }
+        .bold { font-weight: bold; }
+
+        /* Áreas Editáveis */
+        .field-yellow {
+            background-color: #ffffff;
+            padding: 2px 5px;
+            cursor: text;
+            border-bottom: 1px dashed #ccc;
+        }
+        .field-grey {
+            background-color: #ffffff;
+            padding: 2px 5px;
+            cursor: text;
+        }
+        [contenteditable]:focus { outline: 2px solid #007bff; background-color: #fff; }
+
+        /* Assinaturas */
+        .signature-block {
+            margin-top: 50px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        @media print {
+            body { background-color: white; padding: 0; display: block; }
+            .a4-page { box-shadow: none; width: 100%; margin: 0; padding: 20mm; page-break-after: always; height: auto; min-height: auto; border: none; }
+            .a4-page:last-child { page-break-after: auto; }
+            .field-yellow, .field-grey { background-color: transparent !important; border: none; padding: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="a4-page">
+        <header>
+            <h1>J.F.M. SERVIÇOS DE MANUTENÇÃO INDUSTRIAL LTDA</h1>
+            <h2>MEMORIAL DESCRITIVO E DE CÁLCULO DE MONTAGEM DE ANDAIME TUBULAR</h2>
+        </header>
+        <div class="content">
+            <ol class="main-list">
+                <li>1. Introdução
+                    <p>O projeto foi elaborado pela empresa JFM Serviços de Manutenção Industrial Ltda., tendo como responsável técnico a Eng. Mecânico Emerson F. F. Parnoff.</p>
+                </li>
+                <li>2. Objetivo:
+                    <p>Estabelecer os procedimentos que devem ser obedecidos na liberação de montagem e desmontagem de andaimes, com a finalidade de preservar a integridade física dos profissionais.</p>
+                </li>
+                <li>3. Informações Iniciais:
+                    <div style="margin-left: 15px;">
+                        <p>3.1. Contratante:</p>
+                        <ul>
+                            <li><span class="field-yellow" contenteditable="true">(nome da empresa)</span></li>
+                            <li>CNPJ: <span class="field-grey" contenteditable="true">00.000.000/0000-00</span></li>
+                            <li><span class="field-grey" contenteditable="true">(endereço)</span></li>
+                        </ul>
+                        <p>3.2. Dados da obra:</p>
+                        <ul>
+                            <li>OBRA: <span class="field-yellow" contenteditable="true">(nome da empresa)</span></li>
+                            <li>Endereço: <span class="field-grey" contenteditable="true">__________________</span></li>
+                        </ul>
+                        <p>3.3. Responsável pelo projeto:</p>
+                        <ul>
+                            <li>Eng. Mecânico Emerson Francisco Ferreira Parnoff - CREA/RS 272983</li>
+                            <li>ART – anotação de Responsabilidade Técnica – CREA-RS: <span class="field-yellow" contenteditable="true">14180517</span></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>4. Normas utilizadas:
+                    <ul>
+                        <li>NR 18 - Condições E Meio Ambiente De Trabalho Na Indústria Da Construção;.</li>
+                        <li>18.15.18 As torres de andaimes não podem exceder, em altura, quatro vezes a menor dimensão da base de apoio, quando não estaiadas.</li>
+                        <li>NR 35 – Trabalho em Altura</li>
+                        <li>ABNT NBR 6494 - Segurança nos andaimes.</li>
+                    </ul>
+                </li>
+                <li>5. Características
+                    <p>Andaime tubular conforme projeto <span class="field-yellow" contenteditable="true">(tamanho do andaime)</span> com guarda corpo de 1,20 m, com piso metálico. Plataformas de trabalho antiderrapante e com sistema de travamento. Será instalado no <span class="field-yellow" contenteditable="true">(local)</span>.</p>
+                </li>
+            </ol>
+        </div>
+        <div class="page-footer">Página 1 / 7</div>
+    </div>
+
+    <div class="a4-page">
+        <header><h1>J.F.M. SERVIÇOS DE MANUTENÇÃO INDUSTRIAL LTDA</h1></header>
+        <div class="content">
+            <p style="margin-top: 0;">Componentes do sistema:</p>
+            <table>
+                <tr><td class="text-left">1. Base regulável</td><td class="text-left">2. Poste</td></tr>
+                <tr><td class="text-left">3. Travessa</td><td class="text-left">4. Diagonal de contraventamento</td></tr>
+                <tr><td class="text-left">5. Piso</td><td class="text-left">6. Abraçadeira</td></tr>
+                <tr><td class="text-left">7. Roda pé</td><td class="text-left">8. Guarda corpo</td></tr>
+            </table>
+            <div class="section-title-normal">6. Recomendações de Segurança para Montadores de Andaime</div>
+            <ul>
+                <li>Obrigatório ter permissão de trabalho para executar os serviços de montagem;</li>
+                <li>Obrigatório possuir treinamento especifico ministrado por entidade qualificada para trabalho em altura e possuir aptidão médica adequada;</li>
+                <li>Cumprir todos os procedimentos e uso de equipamentos de prevenção de quedas;</li>
+                <li>Seguir as recomendações de projeto do andaime;</li>
+                <li>Toda a área abaixo dos trabalhadores em altura deve ser isolada e identificada;</li>
+                <li>Adotar sinalização de segurança do tipo: acesso interditado, andaime liberado, perigo, cuidado com a cabeça;</li>
+                <li>Iluminação e energização de equipamentos em andaimes só poderão ser feitos com cabos duplamente isolados;</li>
+                <li>Andaimes montados juntos a redes elétricas deverão ter cuidados especiais;</li>
+                <li>Verificar necessidade de aterramento dos andaimes conforme NBR 5419;</li>
+                <li>A ancoragem é essencial para a estabilidade do andaime e deve ser instalada continuamente durante a montagem do mesmo, respeitando as distância máximas padrão adotadas em projeto. A falta de ancoragem ou de resistência insuficiente, reduz a estabilidade da estrutura e podem levar ao desabamento do andaime;</li>
+                <li>Somente ancorar em lugares suficientemente resistentes – sempre na estrutura de concreto armado;</li>
+                <li>O andaime deve estar nivelado e aprumado adequadamente;</li>
+                <li>As chaves e catracas utilizadas para a montagem do andaime devem estarem pressas ao executante – por meio de elástico ou cordão – evitando o risco de queda;</li>
+                <li>Para trabalhos sobre andaimes com altura superior a dois metros ( 2 m), com risco de queda, deve ser utilizado cinto de segurança tipo pára-quedas instalado sempre que possível em estrutura independente do andaime;</li>
+                <li>Quando usar ferramentas elétricas as mesmas devem estar presas ao andaime e deverá ser efetuada inspeção previa nos cabos elétricos, a fim de evitar fugas de corrente para as partes metálicas;</li>
+                <li>Na montagem dos andaimes não se deve iniciar o plano superior sem estarem terminados os níveis inferiores com todos os elementos de estabilidade;</li>
+                <li>Enquanto o andaime estiver em fase de montagem ou reconversão, deve ser proibida a sua utilização, exceto pelo pessoal destacado para esse fim. Assim, deve ser coloca na estrutura do andaime a sinalização de proibição respectiva;</li>
+            </ul>
+        </div>
+        <div class="page-footer">Página 2 / 7</div>
+    </div>
+
+    <div class="a4-page">
+        <header><h1>J.F.M. SERVIÇOS DE MANUTENÇÃO INDUSTRIAL LTDA</h1></header>
+        <div class="content">
+            <ul><li>O andaime só poderá ser utilizado após ter sido emitida declaração assinada pelo responsável da montagem em como o equipamento oferece garantia de boa utilização.</li></ul>
+            <div class="section-title-normal">7. Ferramentas E EPIS Para Montagem</div>
+            <p>Para a montagem do andaime é necessário o uso de EPIS – equipamentos de proteção individual e das ferramentas abaixo listados:</p>
+            <table>
+                <tr style="background-color: #eee;"><td class="text-left bold">EPIS</td><td class="text-left bold">Ferramentas</td></tr>
+                <tr><td class="text-left">Capacete com jugular</td><td class="text-left">Martelo de 500 g</td></tr>
+                <tr><td class="text-left">Óculos com lente incolor</td><td class="text-left">Chave sextavada de catraca 7/8”</td></tr>
+                <tr><td class="text-left">Luvas de couro tipo vaqueta</td><td class="text-left">Nível de bolha</td></tr>
+                <tr><td class="text-left">Cinto pára-quedista</td><td class="text-left">Furadeira com martelete</td></tr>
+                <tr><td class="text-left">Talabarte duplo com mosquetão de abertura maior que 50 mm</td><td class="text-left">Broca 20 mm</td></tr>
+                <tr><td class="text-left">Botina</td><td class="text-left"></td></tr>
+            </table>
+            <p>Importante: Conforme NR 18 todas as ferramentas utilizadas em altura devem ser amarradas ao corpo, devido ao risco de queda.</p>
+            <div class="section-title-normal">8. Sequência de Montagem:</div>
+            <div class="sub-section-title">8.1. Postes</div>
+            <p>O andaime tera apenas um nivel onde será posicionado o piso e reste 1,2 m acima do mesmo para a colocação das travessas do guarda corpo. Todos os postes têm um pino de travamento, esse pino deve ser utilizado na união de postes para evitar o desacoplamento acidental.</p>
+            <p class="bold" style="margin-top: 15px;">Plataforma</p>
+            <p>As pranchas são apoiadas nas travessas perpendiculares a parede e devem ser instaladas em todos os níveis - a cada 2 m – para proporcionar estabilidade ao andaime. As travas contra elevação acidental devem ser travadas. Cada módulo é composto por dois pisos de 32 cm de largura, com comprimento de 2,5 metros.</p>
+            <div class="sub-sub-section-title">8.1.1. Travessas longitudinais</div>
+            <p>Ao nível do piso são utilizadas travessas nos quatro lados do andaime que garantem a estabilidade do mesmo, as travessas servem de sustentação ao cinto de segurança.</p>
+            <div class="sub-sub-section-title">8.1.2. Escadas de acesso</div>
+            <p>Será instalada uma escada na face lateral do andaime, para permitir o acesso à plataforma de forma segura. Escada vertical modular, com largura de 500 mm e espaçamento uniforme dos degraus de 250 mm. A escada será fixada à estrutura do andaime (montantes / travessas), utilizando abraçadeiras de andaime com parafuso de aperto.</p>
+        </div>
+        <div class="page-footer">Página 3 / 7</div>
+    </div>
+
+    <div class="a4-page">
+        <header><h1>J.F.M. SERVIÇOS DE MANUTENÇÃO INDUSTRIAL LTDA</h1></header>
+        <div class="content">
+            <p class="bold" style="margin-bottom: 5px;">Classificação de cargas conforme o tamanho de plataforma</p>
+            <table>
+    <tbody>
+        <tr>
+            <td colspan="4" class="titulo-top">Resistência da plataforma</td>
+        </tr>
+        
+        <tr>
+            <td rowspan="6" class="destaque coluna-lateral">
+                Plataforma<br>com<br>largura de<br>0,30 m
+            </td>
+            <td class="destaque">Comprimento do piso</td>
+            <td class="destaque">Carga uniformemente distribuída</td>
+            <td class="destaque">Carga concentrada em 0,5 m²</td>
+        </tr>
+
+        <tr>
+            <td>1 m</td>
+            <td>600 kgf/m²</td>
+            <td>300 kgf</td>
+        </tr>
+        <tr>
+            <td>1,5 m</td>
+            <td>600 kgf/m²</td>
+            <td>300 kgf</td>
+        </tr>
+        <tr>
+            <td>2 m</td>
+            <td>600 kgf/m²</td>
+            <td>300 kgf</td>
+        </tr>
+        <tr>
+            <td>2,5 m</td>
+            <td>450 kgf/cm²</td>
+            <td>300 kgf</td>
+        </tr>
+        <tr>
+            <td>3 m</td>
+            <td>300 kgf/cm²</td>
+            <td>300 kgf</td>
+        </tr>
+    </tbody>
+</table>
+            <p style="margin-top: -10px; font-size: 13px;">O sistema levou em consideração o peso próprio da estrutura.</p>
+            <div class="section-title-normal">Montagem de outros módulos e níveis:</div>
+            <p>Na montagem dos outros níveis do andaime pode haver riscos de quedas, por isso os trabalhadores devem possuir treinamento especifico para trabalho em altura e estarem em condições físicas para tal atividade.</p>
+            <p>Como prevenção de risco na subida do nível superior do andaime, a primeira ação é a fixação das travessas horizontais como proteção lateral a 1 m de altura, que devem ser instaladas em todo o comprimento do andaime e nas extremidades frontais. Após a instalação da proteção lateral os postes poderão ser prolongados, através do sistema de encaixe tipo espigão. Em seguida instalação das travessas de apoio das plataformas superiores a 2 m de altura e o guarda corpo intermediário a 0,5 m. Após essas instalações devem ser instalados os rodapés e plataformas superiores.</p>
+            <p>Os trabalhadores durante a montagem dos módulos de andaime devem se conectar com o talabarte a estrutura ou a ponto específico. O talabarte deve estar ancorado na estrutura do andaime quando não for possível estar ancorado em estrutura independente.</p>
+            <div class="sub-section-title">8.2. Protetor de tubo</div>
+            <p>Elemento que deve ser colocado nas pontas dos tubos de 48 mm de diâmetro, com à finalidade de proteger contra eventuais cortes e batidas.</p>
+            <div class="section-title-normal">9. MEMÓRIA DE CÁLCULO</div>
+            <p>Para verificação da capacidade de carga são calculados os esforços resistentes das peças e comparados às solicitações atuantes. Consideramos a carga como uniformemente distribuída na plataforma , descarregando nos postes (tubos) de apoio, que agem como vigas. Nas demais peças, o cálculo é realizado considerando como uma estrutura articulada, sendo os esforços transmitidos através de seus nós.</p>
+            <p>A carga considerada é de 1KN/m, equivalente a duas (02) pessoas trabalhando em dois metros quadrados.</p>
+            <p>Verificação por cisalhamento e flexão do tubo (poste) que tem função de viga de apoio da plataforma. Para as outras peças a verificação será dos esforços axiais em função das cargas axiais atuantes, considerando cargas pontuais.</p>
+        </div>
+        <div class="page-footer">Página 4 / 7</div>
+    </div>
+
+    <div class="a4-page">
+        <header><h1>J.F.M. SERVIÇOS DE MANUTENÇÃO INDUSTRIAL LTDA</h1></header>
+        <div class="content">
+            <div class="sub-section-title">9.1. Flexão – Poste</div>
+            <p>Características do tubo:<br>Diâmetro: 48,3 mm e espessura: 3 mm Cálculo da Área:</p>
+            <div class="math-block">
+                A = <div class="fraction"><span class="numerator">π(D² - d²)</span><span class="denominator">4</span></div> = <div class="fraction"><span class="numerator">π(4,83² - 4,23²)</span><span class="denominator">4</span></div> = 4,27 cm²
+            </div>
+            <p>Cálculo Momento de Inércia:</p>
+            <div class="math-block">
+                jx = <div class="fraction"><span class="numerator">π(R⁴ - r⁴)</span><span class="denominator">4</span></div> = <div class="fraction"><span class="numerator">π(2,41⁴ - 2,115⁴)</span><span class="denominator">4</span></div> = 10,99 cm⁴
+            </div>
+            <p>Pela NBR 8800, o momento resistente é:</p>
+            <p>Índice de Esbeltez da Seção (λ)</p>
+            <div class="math-block">λ = <div class="fraction"><span class="numerator">D</span><span class="denominator">t</span></div></div>
+            <div class="math-block">λ = <div class="fraction"><span class="numerator">4,83</span><span class="denominator">0,3</span></div> = 16,1</div>
+            <p>Parâmetro de esbeltez limite para plastificação (λp)</p>
+            <ul>
+                <li style="font-style: italic;">Modulo de elasticidade do aço E = 200000 MPa</li>
+                <li style="font-style: italic;">Tensão de escoamento do aço f<sub>y</sub> = 250 MPa</li>
+            </ul>
+            <div class="math-block">λ<sub>p</sub> = 0,07 <div class="fraction"><span class="numerator">E</span><span class="denominator">f<sub>y</sub></span></div></div>
+            <div class="math-block">λ<sub>p</sub> = 0,07 x <div class="fraction"><span class="numerator">200000</span><span class="denominator">250</span></div> = 56</div>
+            <div class="math-block">λ = 15,1 &nbsp; < &nbsp; λ<sub>p</sub> = 56</div>
+            <p>O momento resistente é:</p>
+            <ul><li>Módulo plástico a flexão (Z)</li></ul>
+            <div class="math-block">
+                Z = <div class="fraction"><span class="numerator">D³ - d³</span><span class="denominator">6</span></div> = <div class="fraction"><span class="numerator">4,83³ - 4,23³</span><span class="denominator">6</span></div> = 6,165 cm³
+            </div>
+            <div class="math-block">
+                M<sub>rd</sub> = <div class="fraction"><span class="numerator">M<sub>pl</sub></span><span class="denominator">γ<sub>a1</sub></span></div> → <div class="fraction"><span class="numerator">Z · f<sub>y</sub></span><span class="denominator">γ<sub>a1</sub></span></div> → <div class="fraction"><span class="numerator">6165mm³ · 250 N/mm²</span><span class="denominator">1,10</span></div> = 140 KN · cm
+            </div>
+            <p>O maior momento atuante é de 80 KN.cm</p>
+            <p>80 < 140 logo OK!</p>
+            <div class="sub-section-title">9.2. Cisalhamento – Poste</div>
+            <p>Conforme NBR 8800 o esforço de cisalhamento é:</p>
+        </div>
+        <div class="page-footer">Página 5 / 7</div>
+    </div>
+
+    <div class="a4-page">
+        <header><h1>J.F.M. SERVIÇOS DE MANUTENÇÃO INDUSTRIAL LTDA</h1></header>
+        <div class="content">
+            <ul><li>Tensão de Cisalhamento Crítica (τ<sub>cr</sub>)</li></ul>
+            <p>t<sub>d</sub> = 0,93 vezes a espessura de parede para tubo com costura e 1 para tubo com costura.</p>
+            
+            <div class="math-block">
+                τ<sub>cr</sub> = <div class="fraction"><span class="numerator">0,78 E</span><span class="denominator">(<div class="fraction"><span class="numerator">D</span><span class="denominator">t<sub>d</sub></span></div>)<sup style="font-size: 0.8em;">3</sup><sub style="font-size: 0.8em; margin-left: -5px;">2</sub></span></div>
+                → τ<sub>cr</sub> = <div class="fraction"><span class="numerator">0,78 · 20000</span><span class="denominator">(17,31)<sup style="font-size: 0.8em;">3</sup><sub style="font-size: 0.8em; margin-left: -5px;">2</sub></span></div>
+                → τ<sub>cr</sub> = <div class="fraction"><span class="numerator">15600</span><span class="denominator">71,84</span></div>
+                → τ<sub>cr</sub> = 217,12 kN/cm²
+            </div>
+
+            <ul><li>Limite da Tensão de Cisalhamento</li></ul>
+            <div class="math-block">
+                τ<sub>cr</sub> ≤ 0,6 f<sub>y</sub> &nbsp;&nbsp;&nbsp;&nbsp; 0,6 f<sub>y</sub> = 15 kN/cm²
+            </div>
+
+            <ul><li>Força Cortante Resistente de Cálculo (V<sub>rd</sub>)</li></ul>
+            <div class="math-block">
+                V<sub>rd</sub> = <div class="fraction"><span class="numerator">0,5 · τ<sub>cr</sub> · A<sub>g</sub></span><span class="denominator">γ<sub>a1</sub></span></div>
+                → V<sub>rd</sub> = <div class="fraction"><span class="numerator">0,5 · 15 · 4,27</span><span class="denominator">1,15</span></div>
+                → V<sub>rd</sub> = 27,84 kN
+            </div>
+
+            <p>O maior esforço atuante é de 1,6 KN, que é menor que o esforço resistente, logo OK!</p>
+
+            <div class="sub-section-title">9.3. Carga axial – Poste</div>
+            
+            <ul><li>Momento de Inércia (I<sub>y</sub>):</li></ul>
+            <div class="math-block">
+                I<sub>y</sub> = <div class="fraction"><span class="numerator">π</span><span class="denominator">64</span></div> · (D<sub>ext</sub>⁴ − D<sub>int</sub>⁴) 
+                → I<sub>y</sub> = <div class="fraction"><span class="numerator">π</span><span class="denominator">64</span></div> · (4,83⁴ − 4,23⁴) 
+                → I<sub>y</sub> = 10,99 cm⁴
+            </div>
+
+            <ul><li>Cálculo da Força Elástica de Flambagem (N<sub>ey</sub>)</li></ul>
+            
+            <p>Considerando um vão de <span class="field-yellow" contenteditable="true">250 cm</span> e o coeficiente K<sub>y</sub> = 1</p>
+
+            <div class="math-block">
+                N<sub>e</sub> = <div class="fraction"><span class="numerator">π² E I</span><span class="denominator">(KL)²</span></div>
+                → N<sub>e</sub> = <div class="fraction"><span class="numerator">π² 20000 ⋅ 10,99</span><span class="denominator">(1 ⋅ 250)²</span></div>
+                → N<sub>e</sub> = 34,71 kN
+            </div>
+
+            <ul><li>Índice de Esbeltez (λ<sub>0</sub>):</li></ul>
+            <div class="math-block">
+                λ<sub>0</sub> = √<div class="fraction"><span class="numerator">A<sub>g</sub> ⋅ f<sub>y</sub></span><span class="denominator">N<sub>e</sub></span></div>
+                → λ<sub>0</sub> = √<div class="fraction"><span class="numerator">4,27 ⋅ 25</span><span class="denominator">34,71</span></div>
+                → λ<sub>0</sub> = 1,75
+            </div>
+
+            <p>λ<sub>0</sub> = 1,75 é maior que > 1,5</p>
+
+            <ul><li>Fator de Redução (x):</li></ul>
+            <div class="math-block">
+                x = <div class="fraction"><span class="numerator">0,877</span><span class="denominator">(λ<sub>0</sub>)²</span></div>
+                = 0,286
+            </div>
+        </div>
+        <div class="page-footer">Página 6 / 7</div>
+    </div>
+
+    <div class="a4-page">
+        <header><h1>J.F.M. SERVIÇOS DE MANUTENÇÃO INDUSTRIAL LTDA</h1></header>
+        <div class="content">
+            <ul><li>Carga Resistente de Cálculo (Nc,Rd)</li></ul>
+            
+            <div class="math-list">
+                <p>D = diametro</p>
+                <p>e = espessura</p>
+                <p>x = 0,286 → eficiência global</p>
+                <p>Q = 1 → fator de flabagem</p>
+                <p>A<sub>g</sub> = 4,27 cm² → area da seção</p>
+                <p>f<sub>y</sub> = 25 kN/cm² → resistencia do aço</p>
+                <p>γ<sub>a1</sub> = 1,10 → coeficiente de segurança</p>
+            </div>
+
+            <div class="math-block">
+                Q = 1, &nbsp;&nbsp;
+                <div class="fraction"><span class="numerator">D</span><span class="denominator">e</span></div> = 16 &nbsp; < &nbsp;
+                <div class="fraction"><span class="numerator">0,11E</span><span class="denominator">f<sub>y</sub></span></div> = 90,2
+            </div>
+
+            <div class="math-block">
+                N<sub>c,Rd</sub> = <div class="fraction"><span class="numerator">x ⋅ Q ⋅ A<sub>g</sub> ⋅ f<sub>y</sub></span><span class="denominator">γ<sub>a1</sub></span></div>
+                = <div class="fraction"><span class="numerator">0,286 ⋅ 1 ⋅ 4,27 ⋅ 25</span><span class="denominator">1,10</span></div>
+                = 27,7
+            </div>
+
+            <p>
+                O maior esforço de compressão que os tubos estão submetidos é de <span class="field-yellow" contenteditable="true">2,8</span> KN que é inferior a carga resistente. OK!
+            </p>
+            <p>
+                Não é necessário calcular os esforços de tração devido à carga resistente ser superior ao valor à compressão calculado.
+            </p>
+
+            <div class="section-title-normal">10. Conclusão</div>
+            <p>
+                Conforme cálculos realizados os andaime a serem montados de acordo com o projeto, suportam a carga de até dois (02) trabalhadores por metro quadrado.
+            </p>
+
+            <div class="section-title-normal">11. Considerações finais</div>
+            <p>
+                Este documento é composto de sete páginas e um anexo. As informações, observações, avaliações e conclusões desse memorial foram realizadas a partir de dados fornecidos pelo contratante.
+            </p>
+
+            <div class="signature-block">
+                <p style="margin-bottom: 20px;">Emerson F. F. Parnoff</p>
+                <p>CREA/RS 272983</p>
+            </div>
+
+            <p style="text-align: center; margin-top: 40px;">
+                Sapucaia do sul, <span class="field-yellow" contenteditable="true">22 de dezembro de 2025</span>.
+            </p>
+
+        </div>
+        <div class="page-footer">Página 7 / 7</div>
+    </div>
+
+</body>
+</html>
